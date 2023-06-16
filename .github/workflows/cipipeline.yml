@@ -1,0 +1,21 @@
+name: Building image
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps: 
+    - uses: actions/checkout@v2
+      name: Check out code
+    - name: Running
+      run: ls -l 
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: pranavshejul15/jenkins-1
+        tags: 1.2, latest
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
